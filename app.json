@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "RickAndMorty",
+    "version": "1.0.0",
+    "icon": "./assets/appIcon.png",
+    "android": {
+      "package": "com.app.rickandmorty",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/appIcon.png",
+        "backgroundColor": "#000000"
+      }
+    }
+  }
+}
