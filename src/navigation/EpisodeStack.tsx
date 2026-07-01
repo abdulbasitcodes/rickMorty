@@ -29,7 +29,7 @@ const transparentHeader = {
 
 export function EpisodeStack(): React.JSX.Element {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false, animation:'slide_from_right' }}>
       <Stack.Screen
         name="EpisodeList"
         component={EpisodeListScreen}
