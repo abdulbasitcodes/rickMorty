@@ -4,18 +4,19 @@ import { CharacterStatus } from '../types/character';
  * Central colour palette. Keeping colours in one typed object avoids
  * hard-coded hex values scattered across component styles.
  */
+// Rick and Morty theme: deep "space" navy-teal with portal-green accents.
 export const colors = {
-  background: '#0d0d0f',
-  surface: '#1b1b20',
-  surfaceAlt: '#26262d',
-  border: '#33333d',
-  primary: '#00b0c8',
-  textPrimary: '#f4f4f5',
-  textSecondary: '#9a9aa6',
-  alive: '#4caf50',
-  dead: '#e0524d',
-  unknown: '#9a9aa6',
-  skeleton: '#2a2a31',
+  background: '#0b1622',
+  surface: '#122636',
+  surfaceAlt: '#1a3547',
+  border: '#274a5c',
+  primary: '#97ce4c',
+  textPrimary: '#eef6f0',
+  textSecondary: '#8aa6ad',
+  alive: '#97ce4c',
+  dead: '#ff5a5f',
+  unknown: '#e4c65b',
+  skeleton: '#1a3547',
 } as const;
 
 /**
