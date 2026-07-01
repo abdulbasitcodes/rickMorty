@@ -9,6 +9,9 @@
         "foregroundImage": "./assets/appIcon.png",
         "backgroundColor": "#000000"
       }
-    }
+    },
+    "plugins": [
+      "expo-image"
+    ]
   }
 }
