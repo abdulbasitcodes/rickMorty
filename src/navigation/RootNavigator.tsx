@@ -1,15 +1,54 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
+import { StyleSheet, Text } from 'react-native';
+import { colors } from '../theme/colors';
 import { CharacterStack } from './CharacterStack';
+import { EpisodeStack } from './EpisodeStack';
+import type { RootTabParamList } from './types';
 
-/**
- * Application root navigator. Wraps the feature stacks in a single
- * `NavigationContainer`. New feature stacks can be composed here later.
- */
+const Tab = createBottomTabNavigator<RootTabParamList>();
+
+const renderCharactersIcon = ({ color }: { color: string }) => (
+  <Text style={[styles.icon, { color }]}>👤</Text>
+);
+
+const renderEpisodesIcon = ({ color }: { color: string }) => (
+  <Text style={[styles.icon, { color }]}>🎬</Text>
+);
+
 export function RootNavigator(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <CharacterStack />
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: colors.primary,
+          tabBarInactiveTintColor: colors.textSecondary,
+          tabBarStyle: styles.tabBar,
+        }}
+      >
+        <Tab.Screen
+          name="CharactersTab"
+          component={CharacterStack}
+          options={{ title: 'Characters', tabBarIcon: renderCharactersIcon }}
+        />
+        <Tab.Screen
+          name="EpisodesTab"
+          component={EpisodeStack}
+          options={{ title: 'Episodes', tabBarIcon: renderEpisodesIcon }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: colors.surface,
+    borderTopColor: colors.border,
+  },
+  icon: {
+    fontSize: 18,
+  },
+});

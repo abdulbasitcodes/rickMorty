@@ -1,3 +1,4 @@
+import { useNavigation, type NavigationProp } from '@react-navigation/native';
 import React, { memo, useCallback } from 'react';
 import { ActivityIndicator, FlatList, type ListRenderItem, StyleSheet, Text, View } from 'react-native';
 import { Skeleton } from '../../../components/Skeleton';
@@ -6,26 +7,29 @@ import type { Episode } from '../../../types/episode';
 import { useEpisodesQuery } from '../hooks/useEpisodesQuery';
 import { EpisodeCard } from './EpisodeCard';
 
-/** Number of skeleton cards shown while episodes load. */
 const SKELETON_COUNT = 4;
 
-/** Props for {@link EpisodesSection}. */
+type EpisodesNav = NavigationProp<{ EpisodeDetail: { id: number } }>;
+
 export interface EpisodesSectionProps {
-  /** Episode URLs from the character (`character.episode`). */
   urls: string[];
 }
 
-/**
- * "Episodes" block: a horizontally scrollable list of the episodes a character
- * appeared in, with its own loading (skeleton) and error states. Memoized.
- */
+/** Horizontal list of a character's episodes; tapping one opens episode detail. */
 function EpisodesSectionComponent({ urls }: EpisodesSectionProps): React.JSX.Element {
   const { data: episodes, isLoading, isError } = useEpisodesQuery(urls);
+  const navigation = useNavigation<EpisodesNav>();
 
   const keyExtractor = useCallback((item: Episode) => String(item.id), []);
+
+  const handlePress = useCallback(
+    (id: number) => navigation.navigate('EpisodeDetail', { id }),
+    [navigation],
+  );
+
   const renderItem = useCallback<ListRenderItem<Episode>>(
-    ({ item }) => <EpisodeCard episode={item} />,
-    [],
+    ({ item }) => <EpisodeCard episode={item} onPress={handlePress} />,
+    [handlePress],
   );
 
   return (

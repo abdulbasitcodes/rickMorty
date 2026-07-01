@@ -1,22 +1,19 @@
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RouteProp } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { ErrorState } from '../../../components/ErrorState';
 import { CharacterDetailSkeleton } from '../../../components/Skeleton';
 import { colors } from '../../../theme/colors';
-import type { CharacterStackParamList } from '../../../navigation/types';
 import { CharacterDetailHero } from '../components/CharacterDetailHero';
 import { CharacterDetailInfo } from '../components/CharacterDetailInfo';
 import { EpisodesSection } from '../components/EpisodesSection';
 import { useCharacterQuery } from '../hooks/useCharacterQuery';
 
-type Props = NativeStackScreenProps<CharacterStackParamList, 'CharacterDetail'>;
+// Registered in more than one stack, so the screen depends only on its param.
+type Props = {
+  route: RouteProp<{ CharacterDetail: { id: number } }, 'CharacterDetail'>;
+};
 
-/**
- * Character Detail screen. Fetches a single character by the `id` route param
- * and renders the large avatar, all character fields, origin/location and a
- * horizontally scrollable list of the episodes they appeared in.
- */
 export function CharacterDetailScreen({ route }: Props): React.JSX.Element {
   const { id } = route.params;
   const { data: character, isLoading, isError, refetch } = useCharacterQuery(id);

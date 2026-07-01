@@ -3,6 +3,7 @@ import { apiClient } from '../../../api/axios';
 import { ENDPOINTS } from '../../../api/endpoints';
 import type { CharacterQueryParams } from '../../../types/api';
 import type { Character, CharacterListResponse } from '../../../types/character';
+import { extractIdsFromUrls } from '../../../utils/urls';
 
 /** Response returned when a query matches no characters (API sends 404). */
 const EMPTY_RESPONSE: CharacterListResponse = {
@@ -72,4 +73,15 @@ export async function fetchCharacters(
 export async function fetchCharacterById(id: number): Promise<Character> {
   const { data } = await apiClient.get<Character>(`${ENDPOINTS.characters}/${id}`);
   return data;
+}
+
+// The batch endpoint returns a single object for one id and an array for many.
+export async function fetchCharactersByUrls(urls: string[]): Promise<Character[]> {
+  const ids = extractIdsFromUrls(urls);
+  if (ids.length === 0) return [];
+
+  const { data } = await apiClient.get<Character | Character[]>(
+    `${ENDPOINTS.characters}/${ids.join(',')}`,
+  );
+  return Array.isArray(data) ? data : [data];
 }

@@ -1,4 +1,8 @@
-/** Barrel export for the navigation layer. */
 export { RootNavigator } from './RootNavigator';
 export { CharacterStack } from './CharacterStack';
-export type { CharacterStackParamList } from './types';
+export { EpisodeStack } from './EpisodeStack';
+export type {
+  CharacterStackParamList,
+  EpisodesStackParamList,
+  RootTabParamList,
+} from './types';

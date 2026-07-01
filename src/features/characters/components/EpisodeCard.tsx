@@ -1,21 +1,25 @@
-import React, { memo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { memo, useCallback } from 'react';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import { colors } from '../../../theme/colors';
 import type { Episode } from '../../../types/episode';
 
-/** Props for {@link EpisodeCard}. */
 export interface EpisodeCardProps {
-  /** The episode to display. */
   episode: Episode;
+  onPress?: (id: number) => void;
 }
 
-/**
- * Compact card for a single episode, used inside the horizontal episode list.
- * Shows the episode code, title and air date. Memoized for smooth scrolling.
- */
-function EpisodeCardComponent({ episode }: EpisodeCardProps): React.JSX.Element {
+/** Compact, tappable card for a single episode in the horizontal list. */
+function EpisodeCardComponent({ episode, onPress }: EpisodeCardProps): React.JSX.Element {
+  const handlePress = useCallback(() => onPress?.(episode.id), [onPress, episode.id]);
+
   return (
-    <View style={styles.card}>
+    <Pressable
+      style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
+      onPress={handlePress}
+      disabled={!onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${episode.episode} ${episode.name}`}
+    >
       <Text style={styles.code}>{episode.episode}</Text>
       <Text style={styles.name} numberOfLines={2}>
         {episode.name}
@@ -23,7 +27,7 @@ function EpisodeCardComponent({ episode }: EpisodeCardProps): React.JSX.Element 
       <Text style={styles.airDate} numberOfLines={1}>
         {episode.air_date}
       </Text>
-    </View>
+    </Pressable>
   );
 }
 
@@ -37,6 +41,7 @@ const styles = StyleSheet.create({
     padding: 14,
     marginRight: 12,
   },
+  cardPressed: { opacity: 0.85 },
   code: {
     color: colors.primary,
     fontSize: 13,
