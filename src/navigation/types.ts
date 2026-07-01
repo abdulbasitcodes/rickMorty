@@ -10,7 +10,15 @@ export type EpisodesStackParamList = {
   CharacterDetail: { id: number };
 };
 
+export type LocationsStackParamList = {
+  LocationList: undefined;
+  LocationDetail: { id: number };
+  CharacterDetail: { id: number };
+  EpisodeDetail: { id: number };
+};
+
 export type RootTabParamList = {
   CharactersTab: undefined;
   EpisodesTab: undefined;
+  LocationsTab: undefined;
 };

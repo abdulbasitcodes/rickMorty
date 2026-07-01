@@ -5,6 +5,7 @@ import { StyleSheet, Text } from 'react-native';
 import { colors } from '../theme/colors';
 import { CharacterStack } from './CharacterStack';
 import { EpisodeStack } from './EpisodeStack';
+import { LocationStack } from './LocationStack';
 import type { RootTabParamList } from './types';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -15,6 +16,10 @@ const renderCharactersIcon = ({ color }: { color: string }) => (
 
 const renderEpisodesIcon = ({ color }: { color: string }) => (
   <Text style={[styles.icon, { color }]}>🎬</Text>
+);
+
+const renderLocationsIcon = ({ color }: { color: string }) => (
+  <Text style={[styles.icon, { color }]}>🌍</Text>
 );
 
 export function RootNavigator(): React.JSX.Element {
@@ -37,6 +42,11 @@ export function RootNavigator(): React.JSX.Element {
           name="EpisodesTab"
           component={EpisodeStack}
           options={{ title: 'Episodes', tabBarIcon: renderEpisodesIcon }}
+        />
+        <Tab.Screen
+          name="LocationsTab"
+          component={LocationStack}
+          options={{ title: 'Locations', tabBarIcon: renderLocationsIcon }}
         />
       </Tab.Navigator>
     </NavigationContainer>

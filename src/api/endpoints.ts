@@ -7,6 +7,8 @@ export const ENDPOINTS = {
   characters: '/character',
   /** Episode collection endpoint (supports multi-id batch fetch). */
   episodes: '/episode',
+  /** Location collection endpoint. */
+  locations: '/location',
 } as const;
 
 /** Union of all known endpoint paths. */
