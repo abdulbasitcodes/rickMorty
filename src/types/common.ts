@@ -4,6 +4,21 @@
  */
 
 /**
+ * Fields common to every top-level API entity (character, episode, location…).
+ * Concrete entities `extend` this to avoid repeating these four fields.
+ */
+export interface BaseEntity {
+  /** Unique identifier. */
+  id: number;
+  /** Human-readable name. */
+  name: string;
+  /** Absolute URL of the entity's own endpoint. */
+  url: string;
+  /** ISO timestamp of when the record was created. */
+  created: string;
+}
+
+/**
  * Pagination metadata returned by every list endpoint of the API.
  * `next` / `prev` are absolute URLs (or `null` at the list boundaries).
  */

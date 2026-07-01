@@ -13,11 +13,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CharacterCard } from '../../../components/CharacterCard';
 import { EmptyState } from '../../../components/EmptyState';
 import { ErrorState } from '../../../components/ErrorState';
+import { CharacterCardSkeleton } from '../../../components/Skeleton';
 import { useCollapsibleHeader } from '../../../hooks/useCollapsibleHeader';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { colors } from '../../../theme/colors';
 import type { Character } from '../../../types/character';
-import { CharacterCardSkeleton } from '../components/CharacterCardSkeleton';
 import { CharacterListHeader } from '../components/CharacterListHeader';
 import { useCharactersQuery } from '../hooks/useCharactersQuery';
 import type { CharacterStackParamList } from '../../../navigation/types';
@@ -41,7 +41,7 @@ const AnimatedFlatList = Animated.FlatList as unknown as typeof FlatList;
  * error states, debounced name search and Redux-backed status/gender filters,
  * all under a custom `Animated` header that hides on scroll.
  */
-export function CharacterListScreen(_props: Props): React.JSX.Element {
+export function CharacterListScreen({ navigation }: Props): React.JSX.Element {
   const insets = useSafeAreaInsets();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 300);
@@ -67,9 +67,14 @@ export function CharacterListScreen(_props: Props): React.JSX.Element {
 
   const keyExtractor = useCallback((item: Character) => String(item.id), []);
 
+  const handleCardPress = useCallback(
+    (id: number) => navigation.navigate('CharacterDetail', { id }),
+    [navigation],
+  );
+
   const renderItem = useCallback<ListRenderItem<Character>>(
-    ({ item }) => <CharacterCard character={item} />,
-    [],
+    ({ item }) => <CharacterCard character={item} onPress={handleCardPress} />,
+    [handleCardPress],
   );
 
   const handleEndReached = useCallback(() => {

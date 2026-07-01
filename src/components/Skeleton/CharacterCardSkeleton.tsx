@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Skeleton } from '../../../components/Skeleton';
-import { colors } from '../../../theme/colors';
+import { colors } from '../../theme/colors';
+import { Skeleton } from './Skeleton';
 
 /**
- * Skeleton placeholder mirroring the {@link CharacterCard} layout, shown while
- * the first page of characters is loading. Memoized (static content).
+ * Skeleton placeholder mirroring the `CharacterCard` layout, shown while the
+ * first page of characters is loading. Memoized (static content).
  */
 function CharacterCardSkeletonComponent(): React.JSX.Element {
   return (

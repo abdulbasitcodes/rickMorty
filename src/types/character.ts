@@ -1,4 +1,4 @@
-import type { PaginatedResponse } from './common';
+import type { BaseEntity, PaginatedResponse } from './common';
 
 /**
  * Life status of a character as returned by the API.
@@ -33,12 +33,11 @@ export interface ResourceRef {
 
 /**
  * A single character entity from the Rick and Morty API.
+ * Shares `id` / `name` / `url` / `created` with all entities via {@link BaseEntity}.
+ * The `/character/{id}` detail endpoint returns this exact same shape, so it is
+ * reused directly for the detail screen (no separate detail type needed).
  */
-export interface Character {
-  /** Unique identifier. */
-  id: number;
-  /** Character name. */
-  name: string;
+export interface Character extends BaseEntity {
   /** Life status. */
   status: CharacterStatus;
   /** Species (e.g. "Human"). */
@@ -55,10 +54,6 @@ export interface Character {
   image: string;
   /** URLs of the episodes the character appears in. */
   episode: string[];
-  /** Absolute URL of the character's own endpoint. */
-  url: string;
-  /** ISO timestamp of when the record was created. */
-  created: string;
 }
 
 /** Paginated response shape for the character list endpoint. */

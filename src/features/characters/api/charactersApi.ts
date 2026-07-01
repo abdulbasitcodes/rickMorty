@@ -2,7 +2,7 @@ import axios from 'axios';
 import { apiClient } from '../../../api/axios';
 import { ENDPOINTS } from '../../../api/endpoints';
 import type { CharacterQueryParams } from '../../../types/api';
-import type { CharacterListResponse } from '../../../types/character';
+import type { Character, CharacterListResponse } from '../../../types/character';
 
 /** Response returned when a query matches no characters (API sends 404). */
 const EMPTY_RESPONSE: CharacterListResponse = {
@@ -59,4 +59,17 @@ export async function fetchCharacters(
     }
     throw error;
   }
+}
+
+/**
+ * Fetches a single character by id from `/character/{id}`.
+ * The endpoint returns the same {@link Character} shape used in the list, so
+ * no separate detail type is required.
+ *
+ * @param id - The character's unique id.
+ * @returns The full character record.
+ */
+export async function fetchCharacterById(id: number): Promise<Character> {
+  const { data } = await apiClient.get<Character>(`${ENDPOINTS.characters}/${id}`);
+  return data;
 }

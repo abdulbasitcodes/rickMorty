@@ -5,6 +5,8 @@
 export const ENDPOINTS = {
   /** Character collection endpoint (supports filtering & pagination). */
   characters: '/character',
+  /** Episode collection endpoint (supports multi-id batch fetch). */
+  episodes: '/episode',
 } as const;
 
 /** Union of all known endpoint paths. */
