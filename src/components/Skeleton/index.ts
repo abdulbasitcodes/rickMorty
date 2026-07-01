@@ -5,4 +5,3 @@ export { CharacterDetailSkeleton } from './CharacterDetailSkeleton';
 export { EpisodeListSkeleton } from './EpisodeListSkeleton';
 export { EpisodeDetailSkeleton } from './EpisodeDetailSkeleton';
 export { LocationListSkeleton } from './LocationListSkeleton';
-export { LocationDetailSkeleton } from './LocationDetailSkeleton';

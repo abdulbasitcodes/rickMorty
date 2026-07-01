@@ -4,7 +4,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { CharacterAvatar } from '../../../components/CharacterAvatar';
 import { EmptyState } from '../../../components/EmptyState';
 import { ErrorState } from '../../../components/ErrorState';
-import { LocationDetailSkeleton, Skeleton } from '../../../components/Skeleton';
+import { EpisodeDetailSkeleton, Skeleton } from '../../../components/Skeleton';
 import { colors } from '../../../theme/colors';
 import type { Character } from '../../../types/character';
 import { useCharactersByUrlsQuery } from '../../characters/hooks/useCharactersByUrlsQuery';
@@ -19,6 +19,7 @@ type LocationDetailNav = NavigationProp<{ CharacterDetail: { id: number } }>;
 const NUM_COLUMNS = 4;
 
 export function LocationDetailScreen({ route }: Props): React.JSX.Element {
+  
   const { id } = route.params;
   const navigation = useNavigation<LocationDetailNav>();
   const { data: location, isLoading, isError, refetch } = useLocationQuery(id);
@@ -70,7 +71,7 @@ export function LocationDetailScreen({ route }: Props): React.JSX.Element {
   }, [residentUrls, isResidentsLoading]);
 
   if (isLoading) {
-    return <LocationDetailSkeleton />;
+    return <EpisodeDetailSkeleton />;
   }
 
   if (isError || !location) {
@@ -131,8 +132,9 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   column: {
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     marginBottom: 20,
+    gap: 8,
   },
   residentsSkeleton: {
     flexDirection: 'row',

@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     marginTop: 28,
+    gap: 6,
   },
   cell: { marginBottom: 20 },
 });

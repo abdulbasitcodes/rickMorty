@@ -129,8 +129,9 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   column: {
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     marginBottom: 20,
+    gap: 8,
   },
   castSkeleton: {
     flexDirection: 'row',
